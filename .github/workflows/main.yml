@@ -1,6 +1,9 @@
 name: Build, Test, and Security Scan for Node.js App
 
-on: push
+on: 
+  push:
+    branches:
+      - main # Trigger on push to the 'main' branch (adjust as needed)
 
 jobs:
   build:
@@ -14,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 21
-          cache: npm
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
@@ -31,7 +34,6 @@ jobs:
       - name: Run SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v4.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
@@ -66,6 +68,6 @@ jobs:
       - name: Run ZAP Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
-          target: 'http://example.com/'
-          rules_file_name: '.zap/rules.tsv'
+          target: 'http://example.com/' # Replace with your actual application URL
+          rules_file_name: '.zap/rules.tsv' # Ensure this file exists
           cmd_options: '-a'
