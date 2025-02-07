@@ -39,7 +39,7 @@ jobs:
           args: >
             -Dsonar.organization=dotnetgithubactionsorg
             -Dsonar.projectKey=dotnetgithubactionsproject
-            -Dsonar.exclusions=**/*.flow,**/node_modules/**
+            -X
 
   security:
     runs-on: ubuntu-latest
